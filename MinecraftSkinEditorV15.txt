@@ -1,4 +1,3 @@
-Code in Comments: 
 '*** Skin Editor for Minecraft 
 '*** (c)2025 CC BY Dr. Gordon Dzemski
 '*** Version 1.5
@@ -379,4 +378,5 @@ If k$="b" Then cur=13'save atlas256x256
 DrawLarge()
 EndIf
 Pause 50
+
 Loop
