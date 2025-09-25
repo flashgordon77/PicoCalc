@@ -1,0 +1,382 @@
+Code in Comments: 
+'*** Skin Editor for Minecraft 
+'*** (c)2025 CC BY Dr. Gordon Dzemski
+'*** Version 1.5
+
+Option DEFAULT INTEGER
+
+CLS
+Dim INTEGER f(62),i,c,x,y,s,selc
+s=10'size of color
+selc=0'color selector
+cur=0
+headY=58
+bodyY=90
+armY=90
+legY=138 
+ofsX=150
+ofsLeg=18
+ofsArm=32
+px=122 'start drawtool
+py=102
+black=RGB(0,0,0)
+
+'Resize your Skin_Big to 256x256
+'Load png "Skin_Big.png",0,0
+'Load png "b:Skin_Small.png",250,250
+
+Blit READ #64,250,250,64,64
+Blit READ #2,32,32,32,32
+Blit READ #3,96,32,32,32
+Blit READ #4,0,32,32,32
+Blit READ #5,64,32,32,32
+Blit READ #6,32,0,32,32
+Blit READ #7,64,0,32,32
+Blit READ #8,80,80,32,48
+Blit READ #9,128,80,32,48
+Blit READ #10,64,80,16,48
+Blit READ #11,112,80,16,48
+Blit READ #12,80,64,32,16
+Blit READ #13,112,64,32,16
+Blit READ #14,176,80,16,48
+Blit READ #15,208,80,16,48
+Blit READ #16,160,80,16,48
+Blit READ #17,192,80,16,48
+Blit READ #18,176,64,16,16
+Blit READ #19,192,64,16,16
+Blit READ #20,144,208,16,48
+Blit READ #21,176,208,16,48
+Blit READ #22,128,208,16,48
+Blit READ #23,160,208,16,48
+Blit READ #24,144,192,16,16
+Blit READ #25,160,192,16,16
+Blit READ #26,16,80,16,48
+Blit READ #27,48,80,16,48
+Blit READ #28,0,80,16,48
+Blit READ #29,32,80,16,48
+Blit READ #30,16,64,16,16
+Blit READ #31,32,64,16,16
+Blit READ #32,80,208,16,48
+Blit READ #33,112,208,16,48
+Blit READ #34,64,208,16,48
+Blit READ #35,96,208,16,48
+Blit READ #36,80,192,16,16
+Blit READ #37,96,192,16,16
+CLS
+
+'gui: screen
+Color (RGB(255,255,0))
+Font 2
+Print @(0,0) "Minecraft Skin Editor V1.5"
+Color (RGB(255,100,200))
+Font 1
+Print "Turn Avatar: w,a,s,d,z,x q=end b=save"
+Print "Draw Tool: arrows, color 0,9 p=paint"
+Box 0,200,320,30,1,1,RGB(0,200,55)
+Box 0,230,320,100,1,1,RGB(255,150,100)
+Color (RGB(255,255,255))
+Font 7
+Print @(250,242)"original skin"
+Blit WRITE #64,250,250
+
+' gui:colorpalete
+For i=0 To 62
+f(i)=RGB(Rnd*255,Rnd*255,Rnd*255)
+Next
+For i=0 To 62
+ x=(i Mod 16)*s
+ y=240+(i\16)*s
+ Box x,y,s,s,1,1,f(i)
+Next
+
+Sub DrawLarge()
+Select Case cur
+
+Case 0'front
+mark=0 'save marker for blitread
+Box 0,45,320,160,1,1,RGB(200,200,255)
+Blit WRITE #2,ofsX,headY
+Blit WRITE #8,ofsX,bodyY
+Blit WRITE #14,ofsX-ofsArm+16,armY
+Blit WRITE #20,ofsX+ofsArm,armY
+Blit WRITE #26,ofsX,legY
+Blit WRITE #32,ofsX+ofsLeg-2,legY
+
+
+Case 1'left
+mark=1
+Box 0,45,320,160,1,1,RGB(200,200,255)
+Blit WRITE #5,ofsX,headY
+Blit WRITE #11,8+ofsx,bodyY
+'Blit WRITE #17,ofsX-ofsArm+40,armY
+Blit WRITE #23,ofsX+ofsArm-24,armY
+Blit WRITE #29,ofsX+8,legY
+'Blit WRITE #35,ofsX+ofsLeg,legY
+
+Case 2'right
+mark=2
+Box 0,45,320,160,1,1,RGB(200,200,255)
+Blit WRITE #4,ofsX,headY
+Blit WRITE #10,8+ofsX,bodyY
+'Blit WRITE #16,ofsX-ofsArm,armY
+Blit WRITE #22,ofsX+ofsArm-24,armY
+Blit WRITE #28,ofsX+8,legY
+'Blit WRITE #34,ofsX+ofsLeg-10,legY
+
+Case 3'back
+mark=3
+Box 0,45,320,160,1,1,RGB(200,200,255)
+Blit WRITE #3,ofsX,headY
+Blit WRITE #9,ofsX,bodyY
+Blit WRITE #15,ofsX-ofsArm+64,armY
+Blit WRITE #21,ofsX+ofsArm-48,armY
+Blit WRITE #27,ofsX+16,legY
+Blit WRITE #33,ofsX+ofsLeg-18,legY
+
+Case 4'up
+mark=4
+Box 0,45,320,160,1,1,RGB(200,200,255)
+Blit WRITE #6,ofsX,headY+4
+Blit WRITE #12,ofsX,bodyY-20
+Blit WRITE #18,ofsX-ofsArm+16,bodyY-20
+Blit WRITE #24,ofsX+ofsArm,bodyY-20
+'Blit WRITE #30,ofsX,bodyY+20
+'Blit WRITE #36,ofsX+ofsLeg,bodyY+20
+
+Case 5'down
+mark=5
+Box 0,45,320,160,1,1,RGB(200,200,255)
+Blit WRITE #7,ofsX,headY+4
+Blit WRITE #13,ofsX,bodyY-20
+Blit WRITE #19,ofsX-ofsArm+16,bodyY-20
+Blit WRITE #25,ofsX+ofsArm,bodyY-20
+Blit WRITE #31,ofsX,bodyY-20
+Blit WRITE #37,ofsX+ofsLeg,bodyY-20
+
+
+
+Case 6'drawing tool movements
+cur=sel
+DrawLarge()
+py=py-4
+Box px,py,4,4,0,1,f(selc)
+Case 7
+cur=sel
+DrawLarge()
+px=px-4
+Box px,py,4,4,0,1,f(selc)
+
+Case 8
+cur=sel
+DrawLarge()
+py=py+4
+Box px,py,4,4,0,1,f(selc)
+
+Case 9
+cur=sel
+DrawLarge()
+px=px+4
+Box px,py,4,4,0,1,f(selc)
+
+
+
+Case 11'colorselection right (0)
+selc=(selc+61)Mod 62
+ For i=0 To 62
+  x=(i Mod 16)*s
+  y=240+(i\16)*s
+  If i=selc Then
+Box x-1,y-1,s+2,s+2,1,RGB(255,255,255)
+  Else
+Box x-1,y-1,s+2,s+2,1,black
+EndIf
+Next
+Pause 50
+
+
+
+Case 10'colorselector left (9)
+selc=(selc+1)Mod 62
+For i=0 To 62
+x=(i Mod 16)*s
+y=240+(i\16)*s
+If i=selc Then
+Box x-1,y-1,s+2,s+2,1,RGB(255,255,255)
+Else
+Box x-1,y-1,s+2,s+2,1,black
+EndIf
+Next
+Pause 50
+
+
+
+Case 13'generate new Atlas and save
+CLS
+Blit write #2,32,32
+Blit write #3,96,32
+Blit write #4,0,32
+Blit write #5,64,32
+Blit write #6,32,0
+Blit write #7,64,0
+Blit write #8,80,80
+Blit write #9,128,80
+Blit write #10,64,80
+Blit write #11,112,80
+Blit write #12,80,64
+Blit write #13,112,64
+Blit write #14,176,80
+Blit write #15,208,80
+Blit write #16,160,80
+Blit write #17,192,80
+Blit write #18,176,64
+Blit write #19,192,64
+Blit write #20,144,208
+Blit write #21,176,208
+Blit write #22,128,208
+Blit write #23,160,208
+Blit write #24,144,192
+Blit write #25,160,192
+Blit write #26,16,80
+Blit write #27,48,80
+Blit write #28,0,80
+Blit write #29,32,80
+Blit write #30,16,64
+Blit write #31,32,64
+Blit write #32,80,208
+Blit write #33,112,208
+Blit write #34,64,208
+Blit write #35,96,208
+Blit write #36,80,192
+Blit write #37,96,192
+
+'reduce picoskin.bmp to 64px with 
+'paint.net for example.
+'Erase black to transparent 
+'and save as picoskin.png.
+'Open the skin file in your 
+'minecraft Java launcher = 
+'open[skins],add new skin,
+'browse for picoskin.png file and 
+'enjoy!
+
+Save image "b:picoskin.bmp",0,0,256,256
+
+Case 12 'paint and save
+Box px,py,4,4,0,1,f(selc)
+If mark = 0 Then'save front
+Blit close #2
+Blit close #8
+Blit close #14
+Blit close #20
+Blit close #26
+Blit close #32
+Blit read #2,ofsX,headY,32,32
+Blit read #8,ofsX,bodyY,32,48
+Blit read #14,ofsX-ofsArm+16,armY,16,48
+Blit read #20,ofsX+ofsArm,armY,16,48
+Blit read #26,ofsX,legY,16,48
+Blit read #32,ofsX+ofsLeg-2,legY,16,48
+EndIf
+
+If mark=1 Then 'save left
+Box px,py,4,4,0,1,f(selc)
+Blit close #5
+Blit close #11
+Blit close #23
+Blit close #29
+Blit read #5,ofsX,headY,32,32
+Blit read #11,8+ofsx,bodyY,16,48
+Blit read #23,ofsX+ofsArm-24,armY,16,48
+Blit read #29,ofsX+8,legY,16,48
+EndIf
+
+If mark=2 Then 'save right
+Box px,py,4,4,0,1,f(selc)
+Blit close #4
+Blit close #10
+Blit close #22
+Blit close #28
+Blit read #4,ofsX,headY,32,32
+Blit read #10,8+ofsX,bodyY,16,48
+Blit read #22,ofsX+ofsArm-24,armY,16,48
+Blit read #28,ofsX+8,legY,16,48
+EndIf
+
+If mark=3 Then 'save back
+Box px,py,4,4,1,f(selc)
+Blit close #3
+Blit close #9
+Blit close #15
+Blit close #21
+Blit close #27
+Blit close #33
+Blit read #3,ofsX,headY,32,32
+Blit read #9,ofsX,bodyY,32,48
+Blit read #15,ofsX-ofsArm+64,armY,16,48
+Blit read #21,ofsX+ofsArm-48,armY,16,48
+Blit read #27,ofsX+16,legY,16,48
+Blit read #33,ofsX+ofsLeg-18,legY,16,48
+EndIf
+
+If mark=4 Then 'save up
+Box px,py,4,4,1,f(selc)
+Blit close #6
+Blit close #12
+Blit close #18
+Blit close #24
+Blit read #6,ofsX,headY+4,32,32
+Blit read #12,ofsX,bodyY-20,32,16
+Blit read #18,ofsX-ofsArm+16,bodyY-20,16,16
+Blit read #24,ofsX+ofsArm,bodyY-20,16,16
+EndIf
+
+If mark=5 Then 'save down
+Box px,py,4,4,1,f(selc)
+Blit close #7
+Blit close #13
+Blit close #19
+Blit close #25
+Blit close #31
+Blit close #37
+Blit read #7,ofsX,headY+4,32,32
+Blit read #13,ofsX,bodyY-20,32,16
+Blit read #19,ofsX-ofsArm+16,bodyY-20,16,16
+Blit read #25,ofsX+ofsArm,bodyY-20,16,16
+Blit read #31,ofsX,bodyY-20,16,16
+Blit read #37,ofsX+ofsLeg,bodyY-20,16,16
+EndIf
+
+End Select
+
+End Sub
+
+DrawLarge()
+
+Do
+k$=Inkey$
+If k$<>"" Then
+If k$="s" Then cur=0 'move avatar
+If k$="a" Then cur=1
+If k$="d" Then cur=2
+If k$="z" Then cur=3
+If k$="w" Then cur=4
+If k$="x" Then cur=5
+If k$="q" Then End
+If k$=Chr$(128) Then cur=6 'move draw tool
+If k$=Chr$(130) Then cur=7
+If k$=Chr$(129) Then cur=8
+If k$=Chr$(131) Then cur=9
+If k$="0" Then cur=10'color picker
+If k$="9" Then cur=11
+If k$="s" Then sel=0 'save last direction
+If k$="a" Then sel=1
+If k$="d" Then sel=2
+If k$="z" Then sel=3
+If k$="w" Then sel=4
+If k$="x" Then sel=5
+If k$="p" Then cur=12'paint dot,blitread
+If k$="b" Then cur=13'save atlas256x256
+DrawLarge()
+EndIf
+Pause 50
+Loop
