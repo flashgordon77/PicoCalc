@@ -14,5 +14,4 @@ Create Game MMBasic: Knight-Game by Sasha
 A nice game written by my eleven years old son Shasha. Catch the red enemy and earn money. Vou lost money from your village (dorf) isf the enemy-Knight will reach the bottom of the screen. 
 Have so much fun!
 [raid.bmp](https://github.com/user-attachments/files/22613555/raid.bmp)
-
-
+[raid_map.bmp](https://github.com/user-attachments/files/22613578/raid_map.bmp)
