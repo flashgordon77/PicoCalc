@@ -1,0 +1,60 @@
+CLS
+px = 100
+py = 100
+dx = 160
+dy = 160
+money = 0
+
+'farbmenue
+bgColor = RGB(150,255,50)
+pca = RGB(0,0,0)
+pci =RGB(255,0,255)
+dc=RGB(255,255,255)
+gci=RGB(255,0,0)
+
+
+
+'haupschleife programm
+Do
+CLS bgColor
+
+'player
+Box px, py, 10, 10, 3,pca, pci
+Text 10, 10, "Money: $" + Str$(money)
+
+'Dorf
+Box dx, dy,40,40,0,dc,dc
+Print @( dx+5, dy+15) "Dorf"
+
+'gegner
+If gy=0 Then
+gx=320*Rnd
+EndIf
+gy=gy+20
+Box gx,gy, 10, 10, 3,pca, gci
+If gy>=320 Then
+gy=0
+money=money-50
+EndIf
+
+If Abs(Int(px-gx))<=10 Then
+If Abs(Int(py-gy))<=10 Then
+money=money+200
+gy=0
+EndIf
+EndIf
+
+
+'tastenschleife
+Do
+k$ = Inkey$
+If k$ = Chr$(130) Then px = px - 10
+If k$ = Chr$(131) Then px = px + 10
+If k$ = Chr$(128) Then py = py - 10
+If k$ = Chr$(129) Then py = py + 10
+If k$ = "m" Then money = money + 1
+If k$ = "q" Then End
+Loop Until k$<>""
+
+Pause 50
+Loop
