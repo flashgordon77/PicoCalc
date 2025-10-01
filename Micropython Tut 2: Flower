@@ -1,0 +1,54 @@
+from PicoCalc import display
+import math
+import time
+
+# Screen center
+cx, cy = 160, 160
+
+# Petal layout
+radius = 100
+num_petals = 12
+angle_step = 2 * math.pi / num_petals
+
+# Petal shape (before rotation)
+petal_length = 40  # how far it stretches outward
+petal_width = 15   # how wide each petal is
+
+# Color range 1 to 14
+colors = [i + 1 for i in range(14)]
+
+def draw_petal(xc, yc, angle, color):
+    # Define petal as 4-point polygon, symmetrical
+    points = []
+    for offset in [-1, -0.5, 0.5, 1]:
+        dx = offset * petal_width
+        dy = -petal_length if offset == 0 else -petal_length * 0.4
+        # Rotate point around (0,0)
+        x = dx * math.cos(angle) - dy * math.sin(angle)
+        y = dx * math.sin(angle) + dy * math.cos(angle)
+        points.append((int(xc + x), int(yc + y)))
+    # Close the polygon
+    points.append(points[0])
+    # Convert to flat list
+    coords = []
+    for p in points:
+        coords.extend(p)
+    display.Poly(cx=0, cy=0, coords=coords, c=color, f=1)
+
+shift = 0
+while True:
+    display.fill(0)  # Clear screen
+
+    # Draw center (yellow = color 3)
+    display.Ellipse(cx, cy, 20, 20, 3, 1)
+
+    for i in range(num_petals):
+        angle = i * angle_step
+        px = int(cx + radius * math.cos(angle))
+        py = int(cy + radius * math.sin(angle))
+        color = colors[(i + shift) % len(colors)]
+        draw_petal(px, py, angle, color)
+
+    display.Show()
+    time.sleep(0.3)
+    shift = (shift + 1) % len(colors)
