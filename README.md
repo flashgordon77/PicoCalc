@@ -1,7 +1,7 @@
-You can also wath the youtube shorts for the Micropython tutorials and MMBasic Game Demos. 
+You can also watch tyoutube shorts for the Micropython tutorials and MMBasic Game Demos. The Links are in the Readme Sections. 
 
-Download the Files you want to your Picocalc and try out the programm.
-The code is written in MMBasic and should work on your Picocalc MMBasic Version 5.x and 6.x.
+Download the Code Files you want to your Picocalc and try out the programm.
+The code is written in either in Micropython or MMBasic and should work on your Picocalc with Micropython MMBasic Version 5.x and 6.x.
 
 Minecraft Skin Editor
 
