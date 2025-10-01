@@ -1,0 +1,93 @@
+import network
+import time
+import ntptime
+import urequests
+import re
+from picocalc import display, keyboard
+
+# Connect to Wi-Fi
+wlan = network.WLAN(network.STA_IF)
+wlan.active(True)
+wlan.connect("yourWlan", "yourPassword")
+
+# Wait until connected
+while not wlan.isconnected():
+    display.fill(0)
+    display.text("Connecting...", 20, 20, 10)
+    display.show()
+    time.sleep(0.2)
+
+# Sync time with NTP server
+try:
+    ntptime.settime()
+except:
+    display.fill(0)
+    display.text("Time sync failed", 10, 20, 9)
+    display.show()
+    while True:
+        pass
+
+# --- Fetch RSS headlines from Newsfeed in ex. ABC Australia ---
+def fetch_rss_headlines():
+    headlines = {}
+    dates = {}
+    feed_url = "http://www.abc.net.au/news/feed/51120/rss.xml"
+
+    response = urequests.get(feed_url)
+
+    # Pattern to extract 3 items
+    item_pattern = '<item>\s*<title>(.*?)</title>.*?</description>\s*<pubDate>(.*?)\+'
+    pattern = item_pattern + '.*?' + item_pattern + '.*?' + item_pattern
+
+    matches = re.search(pattern, response.content)
+    j = 1
+    for i in range(3):
+        headlines[i] = matches.group(j).decode('utf-8')
+        dates[i] = matches.group(j + 1).decode('utf-8')
+        j += 2
+
+    response.close()
+    return headlines, dates
+# -------------------------------------
+
+# Prepare scroll texts
+rss_headlines, _ = fetch_rss_headlines()
+rss_ticker_text = "   ".join([rss_headlines[i] for i in range(3)]) + "   "
+rss_scroll_pos = 35
+
+header_text = "The Atomic Clock * UTC * RSS News Feed *   "
+header_scroll_pos = 35
+
+temp = bytearray(1)
+
+# Main loop
+while True:
+    display.fill(0)
+    display.rect(0,248,320,72,15)
+    display.text("NEWS FEED:",260,295,13)
+    # Scroll header
+    header_scroll = header_text[header_scroll_pos:] + header_text[:header_scroll_pos]
+    display.text(header_scroll[:70], 0,250, 9)
+    header_scroll_pos = (header_scroll_pos + 1) % len(header_text)
+
+    # Get current date and time
+    t = time.localtime()
+    date_str = "{:02d}.{:02d}.{:04d}".format(t[2], t[1], t[0])
+    time_str = "{:02d}:{:02d}:{:02d}".format(t[3], t[4], t[5])
+
+    # Draw date and time
+    display.text(date_str, 55, 270, 12)
+    display.text(time_str, 55, 290, 12)
+
+    # Draw RSS news ticker
+    news_scroll = rss_ticker_text[rss_scroll_pos:] + rss_ticker_text[:rss_scroll_pos]
+    display.text(news_scroll[:53], 0, 310, 14)
+    rss_scroll_pos = (rss_scroll_pos + 1) % len(rss_ticker_text)
+
+    display.show()
+
+    # Exit loop if key is pressed
+    if keyboard.readinto(temp):
+        break
+
+    time.sleep(0.2)
