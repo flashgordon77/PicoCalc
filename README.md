@@ -1,7 +1,7 @@
 MMBAsic Tutorials:  
 TuT 01: Funny Steps in MMBasic https://youtube.com/shorts/-sGcW_dJaNE  
 Tut 02: Animation https://youtube.com/shorts/tUGIiMFLdl8  
-Tut 03: Circles and Tone https://youtube.com/shorts/MVs_x1FJkAY
+Tut 03: Circles and Tone https://youtube.com/shorts/MVs_x1FJkAY  
 Tut 03.1: Circles https://youtube.com/shorts/sneTEUPdg04  
 Tut 04: For...Next loop https://youtube.com/shorts/i4u_CZh0syg  
 Tut 05: Fonts!!! https://youtube.com/shorts/SHzSE7JqeGo    
@@ -18,7 +18,7 @@ Tut 1: Drawing Commands in MicroPython https://youtube.com/shorts/FZlIU81eDWY
 Tut 2: Flower Animation in Mycropython https://youtube.com/shorts/9l2e5ybXaVk  
 Tut 3: Colors in Micropython https://youtube.com/shorts/61xNUKeSKC0  
 Tut 4: Wireless lan in Micropython https://youtube.com/shorts/RBKdni3pr88  
-Tut 5: RSS News Feed & Atomic Clock https://youtube.com/shorts/_6_OgBv2lCM
+Tut 5: RSS News Feed & Atomic Clock https://youtube.com/shorts/_6_OgBv2lCM  
 Tut 6: File Access in Mycropython via os module https://youtube.com/shorts/vfCNapNRqjk
 
 
