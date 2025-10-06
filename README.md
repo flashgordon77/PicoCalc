@@ -1,4 +1,4 @@
-MMBAsic Tutorials:  
+MMBasic Tutorials:  
 TuT 01: Funny Steps in MMBasic https://youtube.com/shorts/-sGcW_dJaNE  
 Tut 02: Animation https://youtube.com/shorts/tUGIiMFLdl8  
 Tut 03: Circles and Tone https://youtube.com/shorts/MVs_x1FJkAY  
