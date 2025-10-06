@@ -1,4 +1,7 @@
-You can also watch youtube shorts for the Micropython tutorials and MMBasic Game Demos. The Links are in the Readme Sections. 
+MMBAsic Tutorials:
+TuT 1: Funny Steps in MMBasic https://youtube.com/shorts/-sGcW_dJaNE
+
+ 
 
 Download the Code Files you want to your Picocalc and try out the programm.
 The code is written either in Micropython or MMBasic and should work on your Picocalc with Micropython MMBasic Version 5.x and 6.x.
