@@ -1,0 +1,62 @@
+------------------------------------------
+' BABEL GENERATOR - Pixel Matrix v4
+' 12x12 random colored pixel blocks
+' Only bottom row new, rest scrolls up
+' Pause with "P" key
+' end with "q"
+' (c)2025 Dr. Gordon Dzemski CCBY
+'------------------------------------------
+
+Option DEFAULT INTEGER
+Randomize Timer
+
+Const W=12,H=12,PIX=2,GAP=2
+Const IMG=W*PIX+GAP
+Const COLS=12,ROWS=6
+Const SW=320,SH=320
+
+Dim i,j,n,xp,yp,r,g,b,bits$
+CLS
+Text 70,2,"BABEL IMAGE GENERATOR"
+
+Do
+'-- Scroll all rows up ---
+For r=1 To ROWS-1
+sy=r*IMG+16 : dy=(r-1)*IMG+16
+Blit READ #1,0,sy,SW,IMG
+Blit WRITE #1,0,dy
+Blit CLOSE #1
+Next
+'--- Clear bottom row ---
+Box 0,(ROWS-1)*IMG+16,SW,IMG,,RGB(0,0,0)
+
+'--- New images bottom row ---
+For n=0 To COLS-1
+xp=n*IMG : yp=(ROWS-1)*IMG+16
+r=Rnd*255 : g=Rnd*255 : b=Rnd*255
+'Box xp,yp,IMG,IMG,1,,RGB(50,50,50)
+bits$="#"
+For j=0 To H-1
+For i=0 To W-1
+If Rnd<0.5 Then
+Box xp+i*PIX+(GAP/2),yp+j*PIX+(GAP/2),PIX,PIX,1,,RGB(r,g,b)
+bits$=bits$+"1"
+Else
+Box xp+i*PIX+(GAP/2),yp+j*PIX+(GAP/2),PIX,PIX,1,,RGB(0,0,0)
+bits$=bits$+"0"
+EndIf
+Next
+Next
+'--- Log bit pattern ---
+Text 0,180+(n Mod COLS)*10,bits$
+Next
+Box 0,306,320,14,1,1,RGB(0,0,0)
+'--- keys ---
+k$=Inkey$
+If k$="p" Then
+Text 0,306, "PAUSE...Press any key to continue..."
+Do While Inkey$=""
+Loop
+EndIf
+If k$="q" Then End
+Loop
