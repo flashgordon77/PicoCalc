@@ -1,8 +1,7 @@
-Newest Demo/Game  
+Newest Demo/Game for the Picocalc in MMBasic or Micropython    
 Babel Image Generator  
-Tut 13: Babel Image Generator https://youtube.com/shorts/vhx4jZ4isKY  
-
   
+Tut 13: Babel Image Generator https://youtube.com/shorts/vhx4jZ4isKY  
 ![Babel](https://github.com/user-attachments/assets/d11739d9-79b1-48b6-affe-d49e1567d94c)
 
 
